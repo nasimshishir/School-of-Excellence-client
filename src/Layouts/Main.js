@@ -1,9 +1,12 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Header from '../Pages/Shared/Header/Header';
 
 const Main = () => {
     return (
         <div>
-            <h2 className='#f8fafc'>Main Component</h2>
+            <Header></Header>
+            <Outlet></Outlet>
         </div>
     );
 };
