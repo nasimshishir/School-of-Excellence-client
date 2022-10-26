@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({ courses }) => {
     return (
-        <div className='bg-gray-700 h-32'>
-            <h2>Sidebar</h2>
-        </div>
+        <div className=''>
+            {
+                courses.map(course => <Link to={`/courses/${course.id}`} key={course.id}><p>{course.title}</p></Link>)
+            }
+        </div >
     );
 };
 
