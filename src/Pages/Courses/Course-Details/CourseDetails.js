@@ -1,9 +1,14 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const CourseDetails = () => {
+    const courseDetailes = useLoaderData();
+
+    const { id, image, duration, instructor, price, rating, classes, title } = courseDetailes;
     return (
         <div>
-            Course Details
+            <p>{title}</p>
+            <p>{price}</p>
         </div>
     );
 };
