@@ -1,14 +1,30 @@
 import React, { createContext, useState } from 'react';
-export const CourseProvider = createContext();
+import { useEffect } from 'react';
 
-const CoursesProvider = () => {
+export const CoursesContext = createContext();
+
+const CoursesProvider = ({ children }) => {
     const [courses, setCourses] = useState()
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setLoading(true)
+        fetch('http://localhost:5000/courses')
+            .then(res => res.json())
+            .then(data => setCourses(data))
+        setLoading(false)
+    }, [])
+
+
+
+    const allCourses = { courses, loading }
 
 
     return (
         <div>
-            <CoursesProvider value={courses}></CoursesProvider>
-
+            <CoursesContext.Provider value={allCourses}>
+                {children}
+            </CoursesContext.Provider>
         </div>
     );
 };

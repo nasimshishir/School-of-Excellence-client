@@ -3,7 +3,9 @@ import { useLoaderData } from 'react-router-dom';
 import CourseCard from '../Courses-Card/CourseCard';
 
 const DisplayCourses = () => {
+
     const courses = useLoaderData();
+
     return (
         <div>
             {

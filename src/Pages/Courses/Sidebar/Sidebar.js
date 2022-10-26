@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
-const Sidebar = ({ courses }) => {
+const Sidebar = () => {
+
+    const courses = useLoaderData();
+
     return (
         <div className=''>
             {
