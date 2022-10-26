@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import CourseCard from '../Courses-Card/CourseCard';
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -45,7 +46,7 @@ const AllCourses = () => {
                         <Sidebar></Sidebar>
                     </div>
                     <div className='col-span-3 px-16'>
-                        <CourseCard></CourseCard>
+                        <Outlet></Outlet>
                     </div>
 
                 </div>
