@@ -1,7 +1,17 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserAlt } from 'react-icons/fa';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <div className='shadow-md hover:shadow-xl w-screen'>
             <div className='container mx-auto px-4 '>
@@ -37,27 +47,47 @@ const Header = () => {
                         </ul>
                     </div>
 
-                    <div className="navbar-end">
-                        <Link to="/login" className="btn btn-outline btn-sm mr-2">Login</Link>
-                        <Link to="/register" className="btn btn-outline btn-sm">Register</Link>
-                    </div>
-                    <div className="dropdown dropdown-end">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="https://placeimg.com/80/80/people" />
-                            </div>
+                    <div className="form-control navbar-end">
+                        <label className="label cursor-pointer">
+                            <span className="label-text text-sm mr-3 opacity-60">Dark Mode</span>
+                            <input type="checkbox" className="toggle toggle-sm" />
                         </label>
-                        <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <Link className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </Link>
-                            </li>
-                            <li><Link>Settings</Link></li>
-                            <li><Link>Logout</Link></li>
-                        </ul>
                     </div>
+
+                    <div className="navbar-end">
+                        {
+                            user?.uid ?
+                                <>
+                                    <div className='dropdown dropdown-end'>
+                                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                            <div>
+                                                {
+                                                    user?.photoURL ?
+                                                        <img className="w-10 rounded-full" src={user.photoURL} alt='' />
+                                                        : <FaUserAlt />
+                                                }
+                                            </div>
+                                        </label>
+                                        <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                                            <li className='mr-2 text-sm font-medium text-center'>{user.displayName}</li>
+                                            <li>
+                                                <Link className="justify-between">
+                                                    Profile
+                                                    <span className="badge">New</span>
+                                                </Link>
+                                            </li>
+                                            <li><button onClick={handleLogOut}><Link>Logout</Link></button></li>
+                                        </ul>
+                                    </div>
+                                </>
+                                :
+                                <>
+                                    <Link to="/login" className="btn btn-outline btn-sm mr-2">Login</Link>
+                                    <Link to="/register" className="btn btn-outline btn-sm">Register</Link>
+                                </>
+                        }
+                    </div>
+
                 </div>
             </div>
         </div>

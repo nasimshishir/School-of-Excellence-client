@@ -6,8 +6,9 @@ import CourseDetails from "../../Pages/Courses/Course-Details/CourseDetails";
 import DisplayCourses from "../../Pages/Courses/Display-Courses/DisplayCourses";
 import Faq from "../../Pages/FAQ/Faq";
 import Home from "../../Pages/Home/Home";
-import Login from "../../Pages/Shared/Login/Login";
-import Register from "../../Pages/Shared/Register/Register";
+import Login from "../../Pages/Login/Login";
+import Register from "../../Pages/Register/Register";
+
 
 export const router = createBrowserRouter([
     {
