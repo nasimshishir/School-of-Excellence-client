@@ -1,28 +1,46 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { useState } from 'react';
 
 const Login = () => {
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-    const { providerLogin } = useContext(AuthContext);
+    const { providerLogin, LoginWithEmailPassword } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider()
 
     const handleLoginSubmit = e => {
         e.preventDefault();
         const form = e.target;
-        const email = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
         console.log(email);
 
+        LoginWithEmailPassword(email, password)
+            .then(result => {
+                const user = result.user;
+                form.reset();
+                setError('')
+                navigate('/courses')
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
+
     }
+
+
 
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                navigate('/courses')
             })
             .catch(error => console.error(error))
     }
@@ -32,25 +50,32 @@ const Login = () => {
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
-                            <h1 className="text-4xl font-bold text-center px-24">Login</h1>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input name="email" type="text" placeholder="email" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input name="password" type="text" placeholder="password" className="input input-bordered" />
-                                <label className="label">
-                                    <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
-                                </label>
-                            </div>
-                            <div className="form-control mt-6">
-                                <button onClick={handleLoginSubmit} className="btn btn-primary">Login</button>
-                            </div>
+                            {/* Login form */}
+                            <form onSubmit={handleLoginSubmit}>
+                                <h1 className="text-4xl font-bold text-center px-24">Login</h1>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Email</span>
+                                    </label>
+                                    <input name="email" type="email" placeholder="email" className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Password</span>
+                                    </label>
+                                    <input name="password" type="password" placeholder="password" className="input input-bordered" />
+                                    <label className="label">
+                                        <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
+                                    </label>
+                                </div>
+                                <div className='my-5 text-center text-red-600 font-medium'>
+                                    <p>(--{error.slice(22, -2)}--)</p>
+                                </div>
+                                <div className="form-control mt-6">
+                                    <button className="btn btn-primary">Login</button>
+                                </div>
+                            </form>
+
                             <div className="form-control mt-6">
                                 <h4 className='font-semibold text-center mb-2'>Login with</h4>
                                 <button onClick={handleGoogleSignIn} className="btn btn-outline mb-2"> <FaGoogle className='mr-3'></FaGoogle> Google</button>

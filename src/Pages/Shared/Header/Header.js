@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import ReactTooltip from 'react-tooltip';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -60,20 +61,19 @@ const Header = () => {
                                 <>
                                     <div className='dropdown dropdown-end'>
                                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                            <div>
+                                            <div data-tip={user?.displayName}>
                                                 {
                                                     user?.photoURL ?
-                                                        <img className="w-10 rounded-full" src={user.photoURL} alt='' />
+                                                        <img data-tip={user?.displayName} className="w-10 rounded-full" src={user?.photoURL} alt='' />
                                                         : <FaUserAlt />
                                                 }
                                             </div>
                                         </label>
                                         <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                                            <li className='mr-2 text-sm font-medium text-center'>{user.displayName}</li>
+                                            <li className='mr-2 mt-2 text-sm font-medium text-center'>{user.displayName}</li>
                                             <li>
                                                 <Link className="justify-between">
                                                     Profile
-                                                    <span className="badge">New</span>
                                                 </Link>
                                             </li>
                                             <li><button onClick={handleLogOut}><Link>Logout</Link></button></li>
@@ -90,6 +90,7 @@ const Header = () => {
 
                 </div>
             </div>
+            <ReactTooltip />
         </div>
     );
 };
