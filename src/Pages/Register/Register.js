@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/'
 
     const { RegisterWithEmailPassword } = useContext(AuthContext);
 
@@ -21,10 +24,9 @@ const Register = () => {
 
         RegisterWithEmailPassword(email, password)
             .then(result => {
-                const user = result.user;
                 setError('');
                 form.reset();
-                navigate('/login')
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.error(error);
@@ -50,7 +52,7 @@ const Register = () => {
                                     <label className="label">
                                         <span className="label-text">Photo URL</span>
                                     </label>
-                                    <input name='photoURL' type="text" placeholder="your full name" className="input input-bordered" />
+                                    <input name='photoURL' type="text" placeholder="your photo name" className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -70,20 +72,18 @@ const Register = () => {
                                     </label>
                                     <input type="password" placeholder="repeat password" className="input input-bordered" />
                                 </div>
-                                <div className='my-5 text-center text-red-600 font-medium'>
-                                    <p>(--{error.slice(22, -2)}--)</p>
-                                </div>
+                                {
+                                    error && <div className='my-5 text-center text-red-600 font-medium'>
+                                        <p>{error.slice(22, -2)}</p>
+                                    </div>
+
+                                }
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">Register</button>
                                 </div>
                             </form>
-                            <div className="form-control mt-6">
-                                <h4 className='font-semibold text-center mb-2'>Sign up with</h4>
-                                <button className="btn btn-outline mb-2"> <FaGoogle className='mr-3'></FaGoogle> Google</button>
-                                <button className="btn btn-outline mb-2"> <FaGithub className='mr-3'></FaGithub> GitHub</button>
-                            </div>
                             <div className='mt-2'>
-                                <p className='text-center'><small>Already have an account? <Link className='text-cyan-700 font-medium' to="/register">Login here</Link></small></p>
+                                <p className='text-center'><small>Already have an account? <Link className='text-cyan-700 font-medium' to="/login">Login here</Link></small></p>
                             </div>
                         </div>
                     </div>

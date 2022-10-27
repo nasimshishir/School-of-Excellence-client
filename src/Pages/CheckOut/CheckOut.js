@@ -1,9 +1,13 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const CheckOut = () => {
+    const { id, title, price } = useLoaderData();
+
     return (
         <div>
-            <p>CheckOut Page</p>
+            <p>{title}</p>
+            <p>{price}</p>
         </div>
     );
 };

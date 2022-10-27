@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { useState } from 'react';
 
 const Login = () => {
@@ -15,6 +15,7 @@ const Login = () => {
 
     const { providerLogin, LoginWithEmailPassword } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider()
+    const gitHubProvider = new GithubAuthProvider()
 
     const handleLoginSubmit = e => {
         e.preventDefault();
@@ -26,8 +27,6 @@ const Login = () => {
         LoginWithEmailPassword(email, password)
             .then(result => {
                 form.reset();
-                setError(error.message)
-
                 setError('')
                 navigate(from, { replace: true })
             })
@@ -43,7 +42,15 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
-                navigate('/courses');
+                navigate(from, { replace: true })
+            })
+            .catch(error => console.error(error))
+
+    }
+    const handleGitHubSignIn = () => {
+        providerLogin(gitHubProvider)
+            .then(result => {
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -73,7 +80,7 @@ const Login = () => {
                                 </div>
                                 {
                                     error && <div className='my-5 text-center text-red-600 font-medium'>
-                                        <p>(--{error.slice(22, -2)}--)</p>
+                                        <p>{error.slice(22, -2)}</p>
                                     </div>
 
                                 }
@@ -85,7 +92,7 @@ const Login = () => {
                             <div className="form-control mt-6">
                                 <h4 className='font-semibold text-center mb-2'>Login with</h4>
                                 <button onClick={handleGoogleSignIn} className="btn btn-outline mb-2"> <FaGoogle className='mr-3'></FaGoogle> Google</button>
-                                <button className="btn btn-outline mb-2"> <FaGithub className='mr-3'></FaGithub> GitHub</button>
+                                <button onClick={handleGitHubSignIn} className="btn btn-outline mb-2"> <FaGithub className='mr-3'></FaGithub> GitHub</button>
                             </div>
                             <div className='mt-2'>
                                 <p className='text-center'><small>Don't have an account? <Link className='text-cyan-700 font-medium' to="/register">Register here</Link></small></p>
@@ -99,4 +106,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Login
