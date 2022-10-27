@@ -10,6 +10,14 @@ const Login = () => {
     const { providerLogin } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider()
 
+    const handleLoginSubmit = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.name.value;
+        console.log(email);
+
+    }
+
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
@@ -29,19 +37,19 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" placeholder="email" className="input input-bordered" />
+                                <input name="email" type="text" placeholder="email" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" placeholder="password" className="input input-bordered" />
+                                <input name="password" type="text" placeholder="password" className="input input-bordered" />
                                 <label className="label">
                                     <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Login</button>
+                                <button onClick={handleLoginSubmit} className="btn btn-primary">Login</button>
                             </div>
                             <div className="form-control mt-6">
                                 <h4 className='font-semibold text-center mb-2'>Login with</h4>
