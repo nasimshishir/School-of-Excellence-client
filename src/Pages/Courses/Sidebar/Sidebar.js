@@ -8,7 +8,7 @@ const Sidebar = () => {
     return (
         <div className=''>
             {
-                courses.map(course => <Link to={`/courses/${course.id}`} key={course.id}><p>{course.title}</p></Link>)
+                courses.map(course => <Link to={`/courses/${course.id}`} key={course.id}><p className='rounded-md shadow-md p-3 my-3 hover:'>{course.title}</p></Link>)
             }
         </div >
     );

@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip';
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
 
+
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -41,10 +42,11 @@ const Header = () => {
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal p-0">
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/courses">All Courses</Link></li>
-                            <li><Link to="/blogs">Blog</Link></li>
-                            <li><Link to="/faq">FAQ</Link></li>
+                            <li className='font-medium'><Link to="/">Home</Link></li>
+                            <li className='font-medium'><Link to="/courses">All Courses</Link></li>
+                            <li className='font-medium'><Link to="/blogs">Blog</Link></li>
+                            <li className='font-medium'><Link to="/faq">FAQ</Link></li>
+                            <li className='font-medium'><Link to="/checkout/5">Checkout</Link></li>
                         </ul>
                     </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
@@ -9,6 +9,9 @@ import { useState } from 'react';
 const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/'
 
     const { providerLogin, LoginWithEmailPassword } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider()
@@ -22,10 +25,11 @@ const Login = () => {
 
         LoginWithEmailPassword(email, password)
             .then(result => {
-                const user = result.user;
                 form.reset();
+                setError(error.message)
+
                 setError('')
-                navigate('/courses')
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.error(error)
@@ -39,8 +43,7 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
             .then(result => {
-                const user = result.user;
-                navigate('/courses')
+                navigate('/courses');
             })
             .catch(error => console.error(error))
     }
@@ -68,9 +71,12 @@ const Login = () => {
                                         <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
                                     </label>
                                 </div>
-                                <div className='my-5 text-center text-red-600 font-medium'>
-                                    <p>(--{error.slice(22, -2)}--)</p>
-                                </div>
+                                {
+                                    error && <div className='my-5 text-center text-red-600 font-medium'>
+                                        <p>(--{error.slice(22, -2)}--)</p>
+                                    </div>
+
+                                }
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">Login</button>
                                 </div>

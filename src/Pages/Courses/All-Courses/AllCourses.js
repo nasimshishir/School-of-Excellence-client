@@ -13,10 +13,10 @@ const AllCourses = () => {
 
             <div className='container mx-auto'>
                 <div className='grid grid-cols-4 gap-4 mt-20'>
-                    <div className=''>
+                    <div>
                         <Sidebar></Sidebar>
                     </div>
-                    <div className='col-span-3 px-16'>
+                    <div className='col-span-3 pl-16'>
                         <Outlet></Outlet>
                     </div>
 

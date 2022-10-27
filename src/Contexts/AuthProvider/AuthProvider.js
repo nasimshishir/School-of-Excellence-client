@@ -10,21 +10,25 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    // const [spinner, setSpinner] = useState(true);
-
-    const RegisterWithEmailPassword = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+    const [isLoading, setIsLoading] = useState(true);
 
     const providerLogin = (provider) => {
         return signInWithPopup(auth, provider)
     }
 
+    const RegisterWithEmailPassword = (email, password) => {
+        setIsLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+
     const LoginWithEmailPassword = (email, password) => {
+        setIsLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     const logOut = () => {
+        setIsLoading(true);
         return signOut(auth);
     }
 
@@ -32,13 +36,16 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('user in auth state change', currentUser);
             setUser(currentUser)
+            setIsLoading(false);
         });
         return () => {
             unsubscribe();
         }
     }, [])
 
-    const authInfo = { user, providerLogin, logOut, LoginWithEmailPassword, RegisterWithEmailPassword };
+
+    const authInfo = { user, isLoading, providerLogin, logOut, LoginWithEmailPassword, RegisterWithEmailPassword };
+
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
