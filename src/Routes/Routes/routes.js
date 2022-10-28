@@ -74,6 +74,14 @@ export const router = createBrowserRouter([
     },
     {
         path: "*",
-        element: <div className="text-center min-h-screen my-auto"><p>404 Error</p></div>
+        element: <div className="hero min-h-screen bg-black">
+            <div className="hero-overlay bg-opacity-60"></div>
+            <div className="hero-content text-center text-neutral-content">
+                <div className="max-w-lg">
+                    <h1 className="mb-5 text-5xl font-bold">404 Error</h1>
+                    <p className="mb-5">This address is not correct. Please enter a valid address</p>
+                </div>
+            </div>
+        </div>
     }
 ])
