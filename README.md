@@ -4,7 +4,8 @@
 
 [https://education-client-42d2a.web.app/] (https://education-client-42d2a.web.app/)
 
-### Frameworks & Libraries
+
+### Frameworks & Libraries & Functions
 
 1. React
 2. Express js

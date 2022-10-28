@@ -28,7 +28,7 @@ const Header = () => {
                 <div className="navbar bg-base-100">
                     <div className="navbar-start">
                         <div>
-                            <img className='max-h-16' src={logo} alt="" />
+                            <Link to="/"><img className='max-h-16' src={logo} alt="" /></Link>
                         </div>
                         <div className="dropdown">
                             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -43,7 +43,7 @@ const Header = () => {
                                 <li><Link to="/register" className="btn btn-outline btn-sm hidden lg:flex">Register</Link></li>
                             </ul>
                         </div>
-                        <Link className="text-2xl font-bold px-5 "><span className='lg:hidden'>SE</span><span className='hidden lg:inline'>School of Excellence</span></Link>
+                        <Link to="/" className="text-2xl font-bold px-5 "><span className='lg:hidden'>SE</span><span className='hidden lg:inline'>School of Excellence</span></Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal p-0">
