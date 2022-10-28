@@ -6,7 +6,7 @@ const Main = () => {
     return (
         <div>
             <Header></Header>
-            <div className='bg-slate-100'>
+            <div className='bg-slate-100 min-h-screen'>
                 <Outlet></Outlet>
             </div>
 

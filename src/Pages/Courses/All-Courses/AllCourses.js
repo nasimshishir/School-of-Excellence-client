@@ -17,7 +17,7 @@ const AllCourses = () => {
                     <div className='col-span-4 lg:col-span-1'>
                         {<div className=''>
                             {
-                                courses.map(course => <Link to={`/courses/${course.id}`} key={course.id}><p className='rounded-md shadow-md p-3 mb-3 hover:'>{course.title}</p></Link>)
+                                courses.map(course => <Link to={`/courses/${course.id}`} key={course.id}><p className='rounded-md shadow-md p-3 mb-3 bg-white hover:bg-slate-200 font-medium'>{course.title}</p></Link>)
                             }
                         </div >}
                     </div>

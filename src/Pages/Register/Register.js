@@ -41,7 +41,7 @@ const Register = () => {
                         <div className="card-body">
                             {/* registration form */}
                             <form onSubmit={handleRegisterSubmit}>
-                                <h1 className="text-4xl font-bold text-center px-24">Register</h1>
+                                <h1 className="text-4xl font-bold text-center w-80">Register</h1>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Full Name</span>

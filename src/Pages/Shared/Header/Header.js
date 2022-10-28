@@ -39,8 +39,6 @@ const Header = () => {
                                 <li><Link to="/courses">All Courses</Link></li>
                                 <li><Link to="/blogs">Blog</Link></li>
                                 <li><Link to="/faq">FAQ</Link></li>
-                                <li><Link to="/login" className="btn btn-outline btn-sm mr-2">Login</Link></li>
-                                <li><Link to="/register" className="btn btn-outline btn-sm hidden lg:flex">Register</Link></li>
                             </ul>
                         </div>
                         <Link to="/" className="text-2xl font-bold px-5 "><span className='lg:hidden'>SE</span><span className='hidden lg:inline'>School of Excellence</span></Link>
