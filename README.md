@@ -1,3 +1,32 @@
+# Site Name: 'School of Excellence'
+
+## Live Site
+
+[https://education-client-42d2a.web.app/] (https://education-client-42d2a.web.app/)
+
+### Frameworks & Libraries
+
+1. React
+2. Express js
+3. Tailwinds
+4. Daisy UI
+5. Firebase Authentication
+
+### Description
+
+This is an Educational website. We do consaltancy on admission in various subjects.
+
+We serve courses on:
+
+1. HND in Digital Technologies
+2. LLB (HONS) LAW
+3. BSC (HONS) SPORT AND EXERCISE SCIENCE
+4. BSC (HONS) PSYCHOLOGY
+5. BSC (HONS) COMPUTING (WEB AND MOBILE DEVELOPMENT)
+6. BSC (HONS) DATA SCIENCE AND ARTIFICIAL INTELLIGENCE
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

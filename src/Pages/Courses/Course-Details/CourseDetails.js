@@ -1,19 +1,25 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import { FaDownload } from 'react-icons/fa'
+import { FaDownload } from 'react-icons/fa';
+import ReactPrint from 'react-to-print';
+import { useRef } from 'react';
 
 const CourseDetails = () => {
+
     const courseDetailes = useLoaderData();
 
     const { id, image, duration, instructor, price, rating, classes, title, details } = courseDetailes;
+
+    const ref = useRef();
     return (
         <div className='container mx-auto'>
             <div className='grid grid-cols-4 gap-4 pt-20'>
                 {/* Details */}
-                <div className='card-body rounded shadow-lg col-span-4 lg:col-span-3'>
+
+                <div ref={ref} className='card-body rounded shadow-lg col-span-4 lg:col-span-3  bg-white'>
                     <div className='lg:flex justify-between mb-5'>
                         <h2 className='text-3xl font-bold mb-3'>{title}</h2>
-                        <button className='btn btn-outline btn-sm'><FaDownload className='mr-2' />Download Details</button>
+
                     </div>
                     <img className='w-full rounded-sm' src={image} alt="" />
                     <div className=''>
@@ -31,14 +37,15 @@ const CourseDetails = () => {
                             <p>{details}</p>
                         </div>
 
-                        <button className='btn btn-outline btn-sm'><Link to={`/checkout/${id}`}>Get Premium Access</Link></button>
+
                     </div>
                 </div>
+
                 {/* Sidebar */}
                 <div className='card-body rounded shadow-lg col-span-4 lg:col-span-1'>
-                    hshshshgh
-                    ghghghfg
-                    hfghfghfgh
+                    <ReactPrint trigger={() => <button className='btn btn-outline btn-sm'><FaDownload className='mr-2' />Download Details</button>}
+                        content={() => ref.current} />
+                    <button className='btn btn-outline btn-sm'><Link to={`/checkout/${id}`}>Get Premium Access</Link></button>
 
                 </div>
             </div>

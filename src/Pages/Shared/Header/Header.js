@@ -5,6 +5,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import ReactTooltip from 'react-tooltip';
 import { useState } from 'react';
+import logo from '../../../assests/logo.png'
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -26,6 +27,9 @@ const Header = () => {
             <div className='lg:container mx-auto px-4 '>
                 <div className="navbar bg-base-100">
                     <div className="navbar-start">
+                        <div>
+                            <img className='max-h-16' src={logo} alt="" />
+                        </div>
                         <div className="dropdown">
                             <label tabIndex={0} className="btn btn-ghost lg:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -39,7 +43,7 @@ const Header = () => {
                                 <li><Link to="/register" className="btn btn-outline btn-sm hidden lg:flex">Register</Link></li>
                             </ul>
                         </div>
-                        <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                        <Link className="text-2xl font-bold px-5 "><span className='lg:hidden'>SE</span><span className='hidden lg:inline'>School of Excellence</span></Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal p-0">
