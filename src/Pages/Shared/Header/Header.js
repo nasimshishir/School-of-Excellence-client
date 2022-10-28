@@ -4,9 +4,16 @@ import { Link } from 'react-router-dom';
 import { FaUserAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import ReactTooltip from 'react-tooltip';
+import { useState } from 'react';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [theme, setTheme] = useState('');
+
+    const toggler = e => {
+        const newTheme = e.target.checked;
+        setTheme(newTheme)
+    }
 
 
     const handleLogOut = () => {
@@ -16,7 +23,7 @@ const Header = () => {
     }
     return (
         <div className='shadow-md hover:shadow-xl w-screen'>
-            <div className='container mx-auto px-4 '>
+            <div className='lg:container mx-auto px-4 '>
                 <div className="navbar bg-base-100">
                     <div className="navbar-start">
                         <div className="dropdown">
@@ -45,8 +52,14 @@ const Header = () => {
 
                     <div className="form-control navbar-end">
                         <label className="label cursor-pointer">
-                            <input type="checkbox" className="toggle toggle-sm" />
+                            <span className="label-text mr-3 opacity-60">
+                                {
+                                    theme ? 'Dark ' : 'Light '
+                                }
+                            </span>
+                            <input onChange={toggler} name='theme' type="checkbox" className="toggle toggle-sm" />
                         </label>
+
                     </div>
 
                     <div className="navbar-end">

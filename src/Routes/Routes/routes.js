@@ -4,7 +4,6 @@ import Blogs from "../../Pages/Blog/Blogs";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
 import AllCourses from "../../Pages/Courses/All-Courses/AllCourses";
 import CourseDetails from "../../Pages/Courses/Course-Details/CourseDetails";
-import DisplayCourses from "../../Pages/Courses/Display-Courses/DisplayCourses";
 import Faq from "../../Pages/FAQ/Faq";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -36,30 +35,24 @@ export const router = createBrowserRouter([
             {
                 path: "/courses",
                 loader: async () => {
-                    return fetch('http://localhost:5000/courses')
+                    return fetch('https://education-server-gold.vercel.app/courses')
                 },
-                element: <AllCourses></AllCourses>,
-                children: ([
-                    {
-                        path: "/courses",
-                        loader: async () => {
-                            return fetch('http://localhost:5000/courses')
-                        },
-                        element: <DisplayCourses></DisplayCourses>
-                    },
-                    {
-                        path: "/courses/:id",
-                        loader: async ({ params }) => {
-                            return fetch(`http://localhost:5000/courses/${params.id}`)
-                        },
-                        element: <CourseDetails></CourseDetails>
-                    }
-                ])
+                element: <AllCourses></AllCourses>
             },
+
+            {
+                path: "/courses/:id",
+                loader: async ({ params }) => {
+                    return fetch(`https://education-server-gold.vercel.app/courses/${params.id}`)
+                },
+                element: <CourseDetails></CourseDetails>
+            },
+
+
             {
                 path: "/checkout/:id",
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/courses/${params.id}`)
+                    return fetch(`https://education-server-gold.vercel.app/courses/${params.id}`)
                 },
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             },
@@ -76,10 +69,11 @@ export const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <PrivateRoute><Profile></Profile></PrivateRoute>
-            }, {
-                path: "*",
-                element: <div>404</div>
-            }
+            },
         ]
+    },
+    {
+        path: "*",
+        element: <div className="text-center min-h-screen my-auto"><p>404 Error</p></div>
     }
 ])

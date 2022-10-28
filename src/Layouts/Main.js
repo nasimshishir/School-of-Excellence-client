@@ -6,7 +6,10 @@ const Main = () => {
     return (
         <div>
             <Header></Header>
-            <Outlet></Outlet>
+            <div className='bg-slate-100'>
+                <Outlet></Outlet>
+            </div>
+
         </div>
     );
 };

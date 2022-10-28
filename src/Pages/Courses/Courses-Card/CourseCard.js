@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course }) => {
 
@@ -11,7 +12,7 @@ const CourseCard = ({ course }) => {
                     <h2 className="card-title">{title}</h2>
                     <p>Click the button to watch on Jetflix app.</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Watch</button>
+                        <button className="btn btn-primary"><Link to={`/courses/${id}`}>Watch</Link></button>
                     </div>
                 </div>
             </div>
